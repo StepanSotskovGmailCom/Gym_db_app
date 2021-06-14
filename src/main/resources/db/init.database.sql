@@ -11,20 +11,12 @@ CREATE TABLE Customer
     ,customer_sex VARCHAR(10)
     ,customer_priority VARCHAR (10)
     ,customer_company int not null unique
-    ,black_list INT
     ,start_date DATETIME
     ,exp_date DATETIME
     ,membership VARCHAR(40) not null unique
     ,activity_type  VARCHAR(40) not null unique
     ,extra VARCHAR(20) not null unique
     ,PRIMARY KEY customer_pk (customer_id)
-);
-
-CREATE TABLE black_list
-(
-    customer_id INT NOT NULL
-    ,PRIMARY KEY customer_pk (customer_id)
-    ,CONSTRAINT black_list_customer_fk FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
 );
 
 CREATE TABLE Companies
