@@ -50,9 +50,26 @@ public class Customer {
     @Column
     private String extra;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "customer_company")
-    private Companies company;
+
+    @OneToMany (mappedBy = "customer_company")
+    private final Set<Companies> companies = new HashSet<>();
+
+    @OneToMany (mappedBy = "membership")
+    private final Set<Membership> memberships = new HashSet<>();
+
+    @OneToMany (mappedBy = "extra")
+    private final Set<Extra> extras = new HashSet<>();
+
+    @OneToMany (mappedBy = "activity_type")
+    private final Set<Activity_type> activity_types = new HashSet<>();
+
+    @OneToMany (mappedBy = "customer_id")
+    private final Set<Employees> employees = new HashSet<>();
+
+
+
+
+
 
 
     public Customer() {
