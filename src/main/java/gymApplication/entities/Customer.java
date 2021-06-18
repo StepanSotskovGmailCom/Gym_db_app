@@ -50,9 +50,8 @@ public class Customer {
     @Column
     private String extra;
 
-
-    @OneToMany (mappedBy = "customer_company")
-    private final Set<Companies> companies = new HashSet<>();
+    @ManyToMany(mappedBy = "customer_company", cascade = CascadeType.ALL)
+    private Set<Companies> companies;
 
     @OneToMany (mappedBy = "membership")
     private final Set<Membership> memberships = new HashSet<>();
@@ -63,8 +62,11 @@ public class Customer {
     @OneToMany (mappedBy = "activity_type")
     private final Set<Activity_type> activity_types = new HashSet<>();
 
-    @OneToMany (mappedBy = "customer_id")
-    private final Set<Employees> employees = new HashSet<>();
+    @OneToOne
+    @JoinColumn(name = "customer_id")
+    private Employees employees;
+
+
 
 
 

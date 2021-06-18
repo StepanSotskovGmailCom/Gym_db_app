@@ -21,8 +21,7 @@ public class Employees {
     @Column
     private String manager_type;
 
-    @ManyToOne
-    @JoinColumn (name="employee_id")
+    @OneToOne(mappedBy = "employee_id")
     private Customer customer;
 
     @OneToMany (mappedBy = "employee_id")

@@ -1,6 +1,7 @@
 package gymApplication.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Companies")
@@ -14,17 +15,19 @@ public class Companies {
     @Column
     private Integer reg_nr;
 
-    @ManyToOne
-    @JoinColumn(name = "company_name")
-    private Customer customer;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "companies")
+    private Set<Customer> customers;
+
+
 
     public Companies() {
     }
 
-    public Companies(String company_name, Integer reg_nr, Customer customer) {
+    public Companies(String company_name, Integer reg_nr, Set<Customer> customers) {
         this.company_name = company_name;
         this.reg_nr = reg_nr;
-        this.customer = customer;
+        this.customers = customers;
     }
 
     public String getCompany_name() {
@@ -43,12 +46,12 @@ public class Companies {
         this.reg_nr = reg_nr;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Set<Customer> getCustomers() {
+        return customers;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
     }
 
     @Override
@@ -56,7 +59,7 @@ public class Companies {
         return "Companies{" +
                 "company_name='" + company_name + '\'' +
                 ", reg_nr=" + reg_nr +
-                ", customer=" + customer +
+                ", customers=" + customers +
                 '}';
     }
 }

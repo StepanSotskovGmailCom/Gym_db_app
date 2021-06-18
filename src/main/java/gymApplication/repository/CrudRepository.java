@@ -41,13 +41,12 @@ public abstract class CrudRepository <T> {
         }
     }
 
-    protected List<T> findAll(String query, Class<T> tClass) {
-        try (Session session = openSession()) {
-            return session.createQuery(query, tClass).list();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return Collections.emptyList();
-        }
+    public void merge(T entity) {
+        runInTransaction((session) -> session.merge(entity));
+    }
+
+    public void delete(T entity) {
+        runInTransaction((session) -> session.delete(entity));
     }
 
     protected T findOne(Long id, Class<T> tClass) {
@@ -59,12 +58,13 @@ public abstract class CrudRepository <T> {
         }
     }
 
-    public void merge(T entity) {
-        runInTransaction((session) -> session.merge(entity));
-    }
-
-    public void delete(T entity) {
-        runInTransaction((session) -> session.delete(entity));
+    protected List<T> findAll(String query, Class<T> tClass) {
+        try (Session session = openSession()) {
+            return session.createQuery(query, tClass).list();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     private Session openSession() {
