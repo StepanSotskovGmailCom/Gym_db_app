@@ -66,14 +66,6 @@ public class Customer {
     @JoinColumn(name = "customer_id")
     private Employees employees;
 
-
-
-
-
-
-
-
-
     public Customer() {
     }
 
@@ -92,6 +84,7 @@ public class Customer {
         this.activity_type = activity_type;
         this.extra = extra;
     }
+
 
     public Long getCustomer_id() {
         return customer_id;

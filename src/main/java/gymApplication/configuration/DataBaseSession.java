@@ -1,7 +1,6 @@
 package gymApplication.configuration;
 
-import gymApplication.entities.Companies;
-import gymApplication.entities.Customer;
+import gymApplication.entities.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -15,7 +14,7 @@ import static java.util.Arrays.asList;
 
 public class DataBaseSession {
 
-    private static final List<Class> ENTITIES = asList(Customer.class, Companies.class);
+    private static final List<Class> ENTITIES = asList(Customer.class, Companies.class, Activity_type.class, Employees.class, Extra.class, Membership.class);
 
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "stepan20";
