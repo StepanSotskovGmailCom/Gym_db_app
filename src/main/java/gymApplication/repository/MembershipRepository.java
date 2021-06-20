@@ -1,6 +1,5 @@
 package gymApplication.repository;
 
-import gymApplication.entities.Extra;
 import gymApplication.entities.Membership;
 
 import java.util.List;

@@ -14,12 +14,12 @@ import static java.util.Arrays.asList;
 
 public class DataBaseSession {
 
-    private static final List<Class> ENTITIES = asList(Customer.class, Companies.class, Activity_type.class, Employees.class, Extra.class, Membership.class);
+    private static final List<Class> ENTITIES = asList(Customer.class, Companies.class, Membership.class);
 
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "stepan20";
 
-    private static final String DB_NAME = "warehouse";
+    private static final String DB_NAME = "gym_app";
     private static final String DB_URL = "jdbc:mysql://localhost:3307/" + DB_NAME + "?useSSL=false&serverTimezone=UTC";
     private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
 

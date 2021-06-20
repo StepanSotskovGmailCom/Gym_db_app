@@ -12,7 +12,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customer_id;
+    private Integer customer_id;
 
     @Column
     private String customer_name;
@@ -20,77 +20,30 @@ public class Customer {
     @Column
     private String customer_surname;
 
-    @Column
-    private Integer customer_card;
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Companies companies;
 
-    @Column
-    private Integer customer_age;
-
-    @Column
-    private String customer_sex;
-
-    @Column
-    private String customer_priority;
-
-    @Column
-    private String customer_company;
-
-    @Column
-    private Date start_date;
-
-    @Column
-    private Date exp_date;
-
-    @Column
-    private String membership;
-
-    @Column
-    private String activity_type;
-
-    @Column
-    private String extra;
-
-    @ManyToMany(mappedBy = "customer_company", cascade = CascadeType.ALL)
-    private Set<Companies> companies;
-
-    @OneToMany (mappedBy = "membership")
-    private final Set<Membership> memberships = new HashSet<>();
-
-    @OneToMany (mappedBy = "extra")
-    private final Set<Extra> extras = new HashSet<>();
-
-    @OneToMany (mappedBy = "activity_type")
-    private final Set<Activity_type> activity_types = new HashSet<>();
-
-    @OneToOne
-    @JoinColumn(name = "customer_id")
-    private Employees employees;
+    @ManyToOne
+    @JoinColumn(name = "membership_id")
+    private Membership membership;
 
     public Customer() {
     }
 
-    public Customer(Long customer_id, String customer_name, String customer_surname, Integer customer_card, Integer customer_age, String customer_sex, String customer_priority, String customer_company, Date start_date, Date exp_date, String membership, String activity_type, String extra) {
+    public Customer(Integer customer_id, String customer_name, String customer_surname, Companies companies, Membership membership) {
         this.customer_id = customer_id;
         this.customer_name = customer_name;
         this.customer_surname = customer_surname;
-        this.customer_card = customer_card;
-        this.customer_age = customer_age;
-        this.customer_sex = customer_sex;
-        this.customer_priority = customer_priority;
-        this.customer_company = customer_company;
-        this.start_date = start_date;
-        this.exp_date = exp_date;
+        this.companies = companies;
         this.membership = membership;
-        this.activity_type = activity_type;
-        this.extra = extra;
     }
 
-
-    public Long getCustomer_id() {
+    public Integer getCustomer_id() {
         return customer_id;
     }
 
-    public void setCustomer_id(Long customer_id) {
+    public void setCustomer_id(Integer customer_id) {
         this.customer_id = customer_id;
     }
 
@@ -110,84 +63,20 @@ public class Customer {
         this.customer_surname = customer_surname;
     }
 
-    public Integer getCustomer_card() {
-        return customer_card;
+    public Companies getCompanies() {
+        return companies;
     }
 
-    public void setCustomer_card(Integer customer_card) {
-        this.customer_card = customer_card;
+    public void setCompanies(Companies companies) {
+        this.companies = companies;
     }
 
-    public Integer getCustomer_age() {
-        return customer_age;
-    }
-
-    public void setCustomer_age(Integer customer_age) {
-        this.customer_age = customer_age;
-    }
-
-    public String getCustomer_sex() {
-        return customer_sex;
-    }
-
-    public void setCustomer_sex(String customer_sex) {
-        this.customer_sex = customer_sex;
-    }
-
-    public String getCustomer_priority() {
-        return customer_priority;
-    }
-
-    public void setCustomer_priority(String customer_priority) {
-        this.customer_priority = customer_priority;
-    }
-
-    public String getCustomer_company() {
-        return customer_company;
-    }
-
-    public void setCustomer_company(String customer_company) {
-        this.customer_company = customer_company;
-    }
-
-    public Date getStart_date() {
-        return start_date;
-    }
-
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
-    }
-
-    public Date getExp_date() {
-        return exp_date;
-    }
-
-    public void setExp_date(Date exp_date) {
-        this.exp_date = exp_date;
-    }
-
-    public String getMembership() {
+    public Membership getMembership() {
         return membership;
     }
 
-    public void setMembership(String membership) {
+    public void setMembership(Membership membership) {
         this.membership = membership;
-    }
-
-    public String getActivity_type() {
-        return activity_type;
-    }
-
-    public void setActivity_type(String activity_type) {
-        this.activity_type = activity_type;
-    }
-
-    public String getExtra() {
-        return extra;
-    }
-
-    public void setExtra(String extra) {
-        this.extra = extra;
     }
 
     @Override
@@ -196,16 +85,8 @@ public class Customer {
                 "customer_id=" + customer_id +
                 ", customer_name='" + customer_name + '\'' +
                 ", customer_surname='" + customer_surname + '\'' +
-                ", customer_card=" + customer_card +
-                ", customer_age=" + customer_age +
-                ", customer_sex='" + customer_sex + '\'' +
-                ", customer_priority='" + customer_priority + '\'' +
-                ", customer_company='" + customer_company + '\'' +
-                ", start_date=" + start_date +
-                ", exp_date=" + exp_date +
-                ", membership='" + membership + '\'' +
-                ", activity_type='" + activity_type + '\'' +
-                ", extra='" + extra + '\'' +
+                ", companies=" + companies +
+                ", membership=" + membership +
                 '}';
     }
 }

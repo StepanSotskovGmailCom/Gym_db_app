@@ -13,18 +13,21 @@ CREATE TABLE Customer
     ,customer_company int not null unique
     ,start_date DATETIME
     ,exp_date DATETIME
-    ,membership VARCHAR(40) not null unique
+    ,membership_id VARCHAR(40) not null unique
     ,activity_type  VARCHAR(40) not null unique
     ,extra VARCHAR(20) not null unique
     ,PRIMARY KEY customer_pk (customer_id)
+    ,CONSTRAINT companies_customer_fk FOREIGN KEY (customer_company) REFERENCES Companies(company_id)
+    ,CONSTRAINT membership_customer FOREIGN KEY (membership_id) REFERENCES membership(membership_id)
+
+
 );
 
 CREATE TABLE Companies
-(
-    company_name varchar(70)
+(   company_id int
+    ,company_name varchar(70)
     ,reg_nr INT
-    ,PRIMARY KEY companies_pk (company_name)
-    ,CONSTRAINT companies_customer_fk FOREIGN KEY (company_name) REFERENCES Customer(customer_company)
+    ,PRIMARY KEY companies_pk (company_id)
 );
 
 CREATE table Employees
@@ -41,10 +44,10 @@ CREATE table Employees
 
 CREATE TABLE membership
 (
-    membership_type VARCHAR(40)
+    membership_id int
+    ,membership_type VARCHAR(40)
     ,price INT
     ,PRIMARY KEY membership_pk (membership_type)
-    ,CONSTRAINT membership_customer FOREIGN KEY (membership_type) REFERENCES Customer(membership)
 );
 
 CREATE TABLE activity_type
