@@ -19,7 +19,7 @@ public class CustomerRepository extends CrudRepository<Customer> {
                         .executeUpdate());
     }
 
-    public Customer findOne(Long id) {
+    public Customer findOne(Integer id) {
         return (Customer) super.findOne(id, Customer.class);
     }
 

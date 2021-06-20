@@ -1,9 +1,6 @@
 package gymApplication.entities;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "customer")
@@ -11,31 +8,31 @@ import java.util.Set;
 public class Customer {
 
     @Id
+    @Column(name = "customer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customer_id;
 
-    @Column
+    @Column(name = "customer_name")
     private String customer_name;
 
-    @Column
+    @Column(name = "customer_surname")
     private String customer_surname;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id")
-    private Companies companies;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_company")
+    private Companies company;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "membership_id")
     private Membership membership;
 
     public Customer() {
     }
 
-    public Customer(Integer customer_id, String customer_name, String customer_surname, Companies companies, Membership membership) {
-        this.customer_id = customer_id;
+    public Customer(String customer_name, String customer_surname, Companies company, Membership membership) {
         this.customer_name = customer_name;
         this.customer_surname = customer_surname;
-        this.companies = companies;
+        this.company = company;
         this.membership = membership;
     }
 
@@ -64,11 +61,11 @@ public class Customer {
     }
 
     public Companies getCompanies() {
-        return companies;
+        return company;
     }
 
     public void setCompanies(Companies companies) {
-        this.companies = companies;
+        this.company = companies;
     }
 
     public Membership getMembership() {
@@ -85,8 +82,8 @@ public class Customer {
                 "customer_id=" + customer_id +
                 ", customer_name='" + customer_name + '\'' +
                 ", customer_surname='" + customer_surname + '\'' +
-                ", companies=" + companies +
-                ", membership=" + membership +
+                ", company_name=" + company.getCompany_name() +
+                ", membership_type=" + membership.getMembership_type() +
                 '}';
     }
 }

@@ -49,7 +49,7 @@ public abstract class CrudRepository <T> {
         runInTransaction((session) -> session.delete(entity));
     }
 
-    protected T findOne(Long id, Class<T> tClass) {
+    protected T findOne(Integer id, Class<T> tClass) {
         try (Session session = openSession()) {
             return session.find(tClass, id);
         } catch (Exception ex) {

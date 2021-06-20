@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MembershipRepository extends CrudRepository<Membership>{
 
-    private static final String HIBERNATE_SELECT_QUERY = "from Extra";
+    private static final String HIBERNATE_SELECT_QUERY = "from membership";
     private static final String ID_PARAM = "membership_type";
     private static final String DELETE_QUERY = "delete from Membership m where m.membership_type = :" + ID_PARAM;
 
@@ -17,7 +17,7 @@ public class MembershipRepository extends CrudRepository<Membership>{
                         .executeUpdate());
     }
 
-    public Membership findOne(Long id) {
+    public Membership findOne(Integer id) {
         return super.findOne(id, Membership.class);
     }
 

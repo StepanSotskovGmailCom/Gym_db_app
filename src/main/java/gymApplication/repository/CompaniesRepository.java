@@ -17,7 +17,7 @@ public class CompaniesRepository extends CrudRepository<Companies>{
                         .executeUpdate());
     }
 
-    public Companies findOne(Long id) {
+    public Companies findOne(Integer id) {
         return super.findOne(id, Companies.class);
     }
 
